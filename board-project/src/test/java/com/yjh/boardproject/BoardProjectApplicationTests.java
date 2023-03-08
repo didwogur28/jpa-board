@@ -1,4 +1,4 @@
-package yjh.boardproject;
+package com.yjh.boardproject;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
