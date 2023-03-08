@@ -1,5 +1,7 @@
 package com.yjh.boardproject.domain;
 
+import java.time.LocalDateTime;
+
 public class Article {
 
     private Long id;

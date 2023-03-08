@@ -1,5 +1,7 @@
 package com.yjh.boardproject.domain;
 
+import java.time.LocalDateTime;
+
 public class ArticleComment {
 
     private Long id;
