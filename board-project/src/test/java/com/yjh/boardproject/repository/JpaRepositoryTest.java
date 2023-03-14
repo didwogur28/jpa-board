@@ -5,7 +5,6 @@ import com.yjh.boardproject.domain.Article;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
@@ -21,12 +20,12 @@ import static org.assertj.core.api.Assertions.*;
 class JpaRepositoryTest {
 
     private final ArticleRepository articleRepository;
-    private final ArticleCommentRepositroy articleCommentRepositroy;
+    private final ArticleCommentRepository articleCommentRepository;
 
     public JpaRepositoryTest(@Autowired ArticleRepository articleRepository,
-                             @Autowired ArticleCommentRepositroy articleCommentRepositroy) {
+                             @Autowired ArticleCommentRepository articleCommentRepository) {
         this.articleRepository = articleRepository;
-        this.articleCommentRepositroy = articleCommentRepositroy;
+        this.articleCommentRepository = articleCommentRepository;
     }
 
     @DisplayName("select 테스트")
@@ -79,18 +78,17 @@ class JpaRepositoryTest {
     @DisplayName("delete 테스트")
     @Test
     void givenTestData_whenDeleting_thenWorksFine() {
-
         // Given
         Article article = articleRepository.findById(1L).orElseThrow();
         long previousArticleCount = articleRepository.count();
-        long previousArticleCommentCount = articleCommentRepositroy.count();
-        long deletedCommentSize = article.getArticleComments().size();
+        long previousArticleCommentCount = articleCommentRepository.count();
+        int deletedCommentsSize = article.getArticleComments().size();
 
-        // when
+        // When
         articleRepository.delete(article);
 
-        //then
+        // Then
         assertThat(articleRepository.count()).isEqualTo(previousArticleCount - 1);
-        assertThat(articleRepository.count()).isEqualTo(previousArticleCommentCount- deletedCommentSize);
+        assertThat(articleCommentRepository.count()).isEqualTo(previousArticleCommentCount - deletedCommentsSize);
     }
 }
