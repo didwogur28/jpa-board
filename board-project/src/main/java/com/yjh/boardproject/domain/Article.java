@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Getter
-@ToString
+@ToString(callSuper = true)
 @Table(indexes = {
         @Index(columnList = "title"),
         @Index(columnList = "hashtag"),
@@ -31,13 +31,15 @@ public class Article extends AuditingFields {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter @ManyToOne(optional = false) private UserAccount userAccount;   // 유저 정보 (ID)
+
     @Setter @Column(nullable = false) private String title;
     @Setter @Column(nullable = false, length = 10000) private String content;
 
     @Setter private String hashtag;
 
     @ToString.Exclude   // 순환 참조로 인한 메모리 풀 에러를 방지하고자 해당 컬럼에서는 toString() 속성 출력을 제거
-    @OrderBy("id")
+    @OrderBy("createdAt DESC")
     // @OneToMany : 1 대 다
     // mappedBy = "article" -> 매핑 할 테이블 명을 세팅 해주지 않으면 새로운 매핑(매핑 할 두 테이블의 이름을 합친) 테이블을 만들어버림
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
@@ -45,14 +47,15 @@ public class Article extends AuditingFields {
 
     protected Article() {}
 
-    private Article(String title, String content, String hashtag) {
+    private Article(UserAccount userAccount, String title, String content, String hashtag) {
+        this.userAccount = userAccount;
         this.title = title;
         this.content = content;
         this.hashtag = hashtag;
     }
 
-    public static Article of(String title, String content, String hashtag) {
-        return new Article(title, content, hashtag);
+    public static Article of(UserAccount userAccount, String title, String content, String hashtag) {
+        return new Article(userAccount, title, content, hashtag);
     }
 
     // 동등성 검사
