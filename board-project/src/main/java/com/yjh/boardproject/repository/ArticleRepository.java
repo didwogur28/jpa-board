@@ -13,7 +13,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public interface ArticleRepository extends
         JpaRepository<Article, Long>,
-        QuerydslPredicateExecutor<Article>,     // Artile 안에 있는 모든 필드 검색 기능 추가
+        QuerydslPredicateExecutor<Article>,     // Article 안에 있는 모든 필드 검색 기능 추가
         QuerydslBinderCustomizer<QArticle> {
     @Override
     default void customize(QuerydslBindings bindings, QArticle root) {
