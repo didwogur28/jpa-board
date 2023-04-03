@@ -34,6 +34,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")		// 사용자 custom 프로퍼티도 문서적 사용이 가능하게 해줌
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 
 	// queryDSL 설정
 	implementation "com.querydsl:querydsl-jpa"
