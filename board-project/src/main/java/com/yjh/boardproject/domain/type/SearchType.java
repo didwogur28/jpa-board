@@ -3,7 +3,6 @@ package com.yjh.boardproject.domain.type;
 import lombok.Getter;
 
 public enum SearchType {
-
     TITLE("제목"),
     CONTENT("본문"),
     ID("유저 ID"),
@@ -15,4 +14,5 @@ public enum SearchType {
     SearchType(String description) {
         this.description = description;
     }
+
 }
