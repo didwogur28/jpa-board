@@ -7,6 +7,7 @@ import com.yjh.boardproject.dto.ArticleCommentDto;
 import com.yjh.boardproject.dto.UserAccountDto;
 import com.yjh.boardproject.repository.ArticleCommentRepository;
 import com.yjh.boardproject.repository.ArticleRepository;
+import com.yjh.boardproject.repository.UserAccountRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,6 +31,7 @@ class ArticleCommentServiceTest {
 
     @Mock private ArticleRepository articleRepository;
     @Mock private ArticleCommentRepository articleCommentRepository;
+    @Mock private UserAccountRepository userAccountRepository;
 
     @DisplayName("게시글 ID로 조회하면, 해당하는 댓글 리스트를 반환한다.")
     @Test
@@ -55,6 +57,7 @@ class ArticleCommentServiceTest {
         // Given
         ArticleCommentDto dto = createArticleCommentDto("댓글");
         given(articleRepository.getReferenceById(dto.articleId())).willReturn(createArticle());
+        given(userAccountRepository.getReferenceById(dto.userAccountDto().userId())).willReturn(createUserAccount());
         given(articleCommentRepository.save(any(ArticleComment.class))).willReturn(null);
 
         // When
@@ -62,6 +65,7 @@ class ArticleCommentServiceTest {
 
         // Then
         then(articleRepository).should().getReferenceById(dto.articleId());
+        then(userAccountRepository).should().getReferenceById(dto.userAccountDto().userId());
         then(articleCommentRepository).should().save(any(ArticleComment.class));
     }
 
@@ -77,6 +81,7 @@ class ArticleCommentServiceTest {
 
         // Then
         then(articleRepository).should().getReferenceById(dto.articleId());
+        then(userAccountRepository).shouldHaveNoInteractions();
         then(articleCommentRepository).shouldHaveNoInteractions();
     }
 
@@ -136,23 +141,23 @@ class ArticleCommentServiceTest {
                 createUserAccountDto(),
                 content,
                 LocalDateTime.now(),
-                "uno",
+                "yjh",
                 LocalDateTime.now(),
-                "uno"
+                "yjh"
         );
     }
 
     private UserAccountDto createUserAccountDto() {
         return UserAccountDto.of(
-                "uno",
+                "yjh",
                 "password",
-                "uno@mail.com",
-                "Uno",
+                "yjh@mail.com",
+                "Yjh",
                 "This is memo",
                 LocalDateTime.now(),
-                "uno",
+                "yjh",
                 LocalDateTime.now(),
-                "uno"
+                "yjh"
         );
     }
 
@@ -166,10 +171,10 @@ class ArticleCommentServiceTest {
 
     private UserAccount createUserAccount() {
         return UserAccount.of(
-                "uno",
+                "yjh",
                 "password",
-                "uno@email.com",
-                "Uno",
+                "yjh@email.com",
+                "Yjh",
                 null
         );
     }
