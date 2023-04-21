@@ -1,6 +1,7 @@
 package com.yjh.boardproject.controller;
 
 import com.yjh.boardproject.config.SecurityConfig;
+import com.yjh.boardproject.util.FormDataEncoder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @DisplayName("View 컨트롤러 - 인증")
-@Import(SecurityConfig.class)
-@WebMvcTest(Void.class)
+@Import({SecurityConfig.class, FormDataEncoder.class})
+@WebMvcTest(ArticleController.class)
 public class AuthControllerTest {
 
     private final MockMvc mvc;
