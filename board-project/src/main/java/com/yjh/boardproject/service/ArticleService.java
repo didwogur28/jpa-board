@@ -2,9 +2,8 @@ package com.yjh.boardproject.service;
 
 import com.yjh.boardproject.domain.Article;
 import com.yjh.boardproject.domain.UserAccount;
-import com.yjh.boardproject.domain.type.SearchType;
+import com.yjh.boardproject.domain.constant.SearchType;
 import com.yjh.boardproject.dto.ArticleDto;
-import com.yjh.boardproject.dto.ArticleUpdateDto;
 import com.yjh.boardproject.dto.ArticleWithCommentsDto;
 import com.yjh.boardproject.repository.ArticleRepository;
 import com.yjh.boardproject.repository.UserAccountRepository;

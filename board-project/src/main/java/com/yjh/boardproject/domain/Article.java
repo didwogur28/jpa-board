@@ -3,15 +3,8 @@ package com.yjh.boardproject.domain;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.core.annotation.Order;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -33,17 +26,16 @@ public class Article extends AuditingFields {
 
     @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId") private UserAccount userAccount; // 유저 정보 (ID)
 
-    @Setter @Column(nullable = false) private String title;
-    @Setter @Column(nullable = false, length = 10000) private String content;
+    @Setter @Column(nullable = false) private String title; // 제목
+    @Setter @Column(nullable = false, length = 10000) private String content; // 본문
 
-    @Setter private String hashtag;
+    @Setter private String hashtag; // 해시태그
 
-    @ToString.Exclude   // 순환 참조로 인한 메모리 풀 에러를 방지하고자 해당 컬럼에서는 toString() 속성 출력을 제거
+    @ToString.Exclude
     @OrderBy("createdAt DESC")
-    // @OneToMany : 1 대 다
-    // mappedBy = "article" -> 매핑 할 테이블 명을 세팅 해주지 않으면 새로운 매핑(매핑 할 두 테이블의 이름을 합친) 테이블을 만들어버림
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
+
 
     protected Article() {}
 
@@ -58,16 +50,16 @@ public class Article extends AuditingFields {
         return new Article(userAccount, title, content, hashtag);
     }
 
-    // 동등성 검사
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Article article)) return false;  // pattern matching
-        return id != null && id.equals(article.id);
+        if (!(o instanceof Article that)) return false;
+        return id != null && id.equals(that.getId());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }

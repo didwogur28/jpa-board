@@ -1,7 +1,7 @@
 package com.yjh.boardproject.controller;
 
+import com.yjh.boardproject.dto.request.ArticleCommentRequest;
 import com.yjh.boardproject.dto.security.BoardPrincipal;
-import com.yjh.boardproject.request.ArticleCommentRequest;
 import com.yjh.boardproject.service.ArticleCommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

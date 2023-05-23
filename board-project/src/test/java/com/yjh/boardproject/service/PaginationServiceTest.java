@@ -24,11 +24,11 @@ class PaginationServiceTest {
         this.sut = paginationService;
     }
 
-    @DisplayName("현재 페이지 번호와 총 페이지 수를 주면, 페이징 바 리스트를 만들어 줌")
-    @MethodSource
-    @ParameterizedTest(name = "[{index}] {0}, {1} => {2}")      // 테스트 해보고 싶은 데이터를 여러개 나열해서 할 수 있게 해주는 어노테이션
-    void givenCurrentPageNumberAndTotalPages_whenCalculating_thenReturnsPaginationBarNumbers(int currentPageNumber, int totalPages, List<Integer> expected) {
 
+    @DisplayName("현재 페이지 번호와 총 페이지 수를 주면, 페이징 바 리스트를 만들어준다.")
+    @MethodSource
+    @ParameterizedTest(name = "[{index}] 현재 페이지: {0}, 총 페이지: {1} => {2}")
+    void givenCurrentPageNumberAndTotalPages_whenCalculating_thenReturnsPaginationBarNumbers(int currentPageNumber, int totalPages, List<Integer> expected) {
         // Given
 
         // When
@@ -53,10 +53,9 @@ class PaginationServiceTest {
         );
     }
 
-    @DisplayName("현재 설정되어 있는 페이지네이션 바의 길이를 알려줌")
+    @DisplayName("현재 설정되어 있는 페이지네이션 바의 길이를 알려준다.")
     @Test
     void givenNothing_whenCalling_thenReturnsCurrentBarLength() {
-
         // Given
 
         // When
@@ -65,4 +64,5 @@ class PaginationServiceTest {
         // Then
         assertThat(barLength).isEqualTo(5);
     }
+
 }

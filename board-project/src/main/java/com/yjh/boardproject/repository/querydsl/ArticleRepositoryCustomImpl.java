@@ -15,12 +15,13 @@ public class ArticleRepositoryCustomImpl extends QuerydslRepositorySupport imple
 
     @Override
     public List<String> findAllDistinctHashtags() {
-
         QArticle article = QArticle.article;
 
         return from(article)
                 .distinct()
                 .select(article.hashtag)
-                .where(article.hashtag.isNotNull()).fetch();
+                .where(article.hashtag.isNotNull())
+                .fetch();
     }
+
 }

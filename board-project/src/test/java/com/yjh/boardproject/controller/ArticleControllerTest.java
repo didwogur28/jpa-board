@@ -1,14 +1,13 @@
 package com.yjh.boardproject.controller;
 
-import com.yjh.boardproject.config.SecurityConfig;
 import com.yjh.boardproject.config.TestSecurityConfig;
-import com.yjh.boardproject.domain.FormStatus;
-import com.yjh.boardproject.domain.type.SearchType;
+import com.yjh.boardproject.domain.constant.FormStatus;
+import com.yjh.boardproject.domain.constant.SearchType;
 import com.yjh.boardproject.dto.ArticleDto;
 import com.yjh.boardproject.dto.ArticleWithCommentsDto;
 import com.yjh.boardproject.dto.UserAccountDto;
-import com.yjh.boardproject.request.ArticleRequest;
-import com.yjh.boardproject.response.ArticleResponse;
+import com.yjh.boardproject.dto.request.ArticleRequest;
+import com.yjh.boardproject.dto.response.ArticleResponse;
 import com.yjh.boardproject.service.ArticleService;
 import com.yjh.boardproject.service.PaginationService;
 import com.yjh.boardproject.util.FormDataEncoder;
@@ -46,10 +45,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ArticleControllerTest {
 
     private final MockMvc mvc;
+
     private final FormDataEncoder formDataEncoder;
 
     @MockBean private ArticleService articleService;
     @MockBean private PaginationService paginationService;
+
 
     public ArticleControllerTest(
             @Autowired MockMvc mvc,

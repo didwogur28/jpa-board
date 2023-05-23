@@ -1,10 +1,10 @@
 package com.yjh.boardproject.repository;
 
-import com.querydsl.core.types.dsl.DateTimeExpression;
-import com.querydsl.core.types.dsl.StringExpression;
 import com.yjh.boardproject.domain.Article;
 import com.yjh.boardproject.domain.QArticle;
 import com.yjh.boardproject.repository.querydsl.ArticleRepositoryCustom;
+import com.querydsl.core.types.dsl.DateTimeExpression;
+import com.querydsl.core.types.dsl.StringExpression;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

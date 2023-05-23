@@ -30,7 +30,7 @@ spring:
 
 spring:
   config.activate.on-profile: heroku
-  datasouce:
+  datasource:
     url: ${JAWSDB_URL}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa.hibernate.ddl-auto: create

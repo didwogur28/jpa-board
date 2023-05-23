@@ -2,7 +2,7 @@ package com.yjh.boardproject.controller;
 
 import com.yjh.boardproject.config.TestSecurityConfig;
 import com.yjh.boardproject.dto.ArticleCommentDto;
-import com.yjh.boardproject.request.ArticleCommentRequest;
+import com.yjh.boardproject.dto.request.ArticleCommentRequest;
 import com.yjh.boardproject.service.ArticleCommentService;
 import com.yjh.boardproject.util.FormDataEncoder;
 import org.junit.jupiter.api.DisplayName;
@@ -31,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ArticleCommentControllerTest {
 
     private final MockMvc mvc;
+
     private final FormDataEncoder formDataEncoder;
 
     @MockBean private ArticleCommentService articleCommentService;

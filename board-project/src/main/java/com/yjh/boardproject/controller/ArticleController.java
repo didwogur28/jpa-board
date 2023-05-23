@@ -1,12 +1,11 @@
 package com.yjh.boardproject.controller;
 
-import com.yjh.boardproject.domain.FormStatus;
-import com.yjh.boardproject.domain.type.SearchType;
-import com.yjh.boardproject.dto.UserAccountDto;
+import com.yjh.boardproject.domain.constant.FormStatus;
+import com.yjh.boardproject.domain.constant.SearchType;
+import com.yjh.boardproject.dto.request.ArticleRequest;
+import com.yjh.boardproject.dto.response.ArticleResponse;
+import com.yjh.boardproject.dto.response.ArticleWithCommentsResponse;
 import com.yjh.boardproject.dto.security.BoardPrincipal;
-import com.yjh.boardproject.request.ArticleRequest;
-import com.yjh.boardproject.response.ArticleResponse;
-import com.yjh.boardproject.response.ArticleWithCommentResponse;
 import com.yjh.boardproject.service.ArticleService;
 import com.yjh.boardproject.service.PaginationService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -49,10 +47,10 @@ public class ArticleController {
 
     @GetMapping("/{articleId}")
     public String article(@PathVariable Long articleId, ModelMap map) {
-        ArticleWithCommentResponse article = ArticleWithCommentResponse.from(articleService.getArticleWithComments(articleId));
+        ArticleWithCommentsResponse article = ArticleWithCommentsResponse.from(articleService.getArticleWithComments(articleId));
 
         map.addAttribute("article", article);
-        map.addAttribute("articleComments", article.articleCommentResponses());
+        map.addAttribute("articleComments", article.articleCommentsResponse());
         map.addAttribute("totalCount", articleService.getArticleCount());
 
         return "articles/detail";
@@ -83,7 +81,7 @@ public class ArticleController {
         return "articles/form";
     }
 
-    @PostMapping ("/form")
+    @PostMapping("/form")
     public String postNewArticle(
             @AuthenticationPrincipal BoardPrincipal boardPrincipal,
             ArticleRequest articleRequest
@@ -103,7 +101,7 @@ public class ArticleController {
         return "articles/form";
     }
 
-    @PostMapping ("/{articleId}/form")
+    @PostMapping("/{articleId}/form")
     public String updateArticle(
             @PathVariable Long articleId,
             @AuthenticationPrincipal BoardPrincipal boardPrincipal,
@@ -114,7 +112,7 @@ public class ArticleController {
         return "redirect:/articles/" + articleId;
     }
 
-    @PostMapping ("/{articleId}/delete")
+    @PostMapping("/{articleId}/delete")
     public String deleteArticle(
             @PathVariable Long articleId,
             @AuthenticationPrincipal BoardPrincipal boardPrincipal

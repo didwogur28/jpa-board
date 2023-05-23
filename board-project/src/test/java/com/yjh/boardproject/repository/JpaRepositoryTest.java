@@ -1,6 +1,5 @@
 package com.yjh.boardproject.repository;
 
-import com.yjh.boardproject.config.JpaConfig;
 import com.yjh.boardproject.domain.Article;
 import com.yjh.boardproject.domain.UserAccount;
 import org.junit.jupiter.api.DisplayName;
@@ -12,12 +11,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("JPA 연결 테스트")
 @Import(JpaRepositoryTest.TestJpaConfig.class)
@@ -102,10 +100,10 @@ class JpaRepositoryTest {
     @EnableJpaAuditing
     @TestConfiguration
     public static class TestJpaConfig {
-
         @Bean
         public AuditorAware<String> auditorAware() {
             return () -> Optional.of("yjh");
         }
     }
+
 }
