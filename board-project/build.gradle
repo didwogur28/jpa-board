@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.yjh'
-version = '0.0.1-SNAPSHOT'
+version = 'v1.1'
 sourceCompatibility = '17'
 
 configurations {
@@ -22,9 +22,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation("org.springframework.boot:spring-boot-starter-data-rest")
-	implementation("org.springframework.data:spring-data-rest-hal-explorer")	// 만든 api를 시각적으로 테스트 가능하게 해주는 dependencies
-	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.data:spring-data-rest-hal-explorer'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	runtimeOnly 'com.h2database:h2'
@@ -32,7 +32,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
-	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")		// 사용자 custom 프로퍼티도 문서적 사용이 가능하게 해줌
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
@@ -48,6 +48,7 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
 
 // Querydsl 설정부
 def generated = 'src/main/generated'
@@ -65,4 +66,11 @@ sourceSets {
 // gradle clean 시에 QClass 디렉토리 삭제
 clean {
 	delete file(generated)
+}
+
+// Heroku 설정
+jar {
+	manifest {
+		attributes('Main-Class': 'com.fastcampus.projectboard.FastCampusProjectBoardApplication')
+	}
 }
