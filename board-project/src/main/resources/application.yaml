@@ -31,6 +31,7 @@ spring:
 spring:
   config.activate.on-profile: heroku
   datasouce:
-    url: ${CLEARDB_WHITE_URL}
+    url: ${JAWSDB_URL}
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa.hibernate.ddl-auto: create
   sql.init.mode: always
