@@ -10,7 +10,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Map;
 
-@Disabled
 @TestComponent
 public class FormDataEncoder {
 
